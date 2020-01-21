@@ -3,6 +3,7 @@
 //
 
 #include <cmath>
+#include <iostream>
 #include "PatternRecognition.h"
 
 void PatternRecognition::findPattern() {
@@ -15,4 +16,17 @@ void PatternRecognition::findPattern() {
     }
 
     begin = min_element_array(sads,target_sequence.getLength()-query_sequence.getLength()+1);
+}
+
+void PatternRecognition::PrintPattern() {
+    for (int i=begin;i<begin + query_sequence.getLength();i++){
+        std::cout << target_sequence.getValues()[i] << " ";
+    }
+
+    std::cout << std::endl;
+
+    for (int i=0;i<query_sequence.getLength();i++){
+        std::cout << query_sequence.getValues()[i] << " ";
+    }
+
 }

@@ -9,12 +9,14 @@
 #include "Utils.h"
 
 class PatternRecognition {
+public:
 
     PatternRecognition(Sequence query_sequence, Sequence target_sequence) : query_sequence(query_sequence),
-                                                                            target_sequence(target_sequence) {
-    }
+                                                                            target_sequence(target_sequence) {}
 
     void findPattern();
+
+    void PrintPattern();
 
 
 private:
