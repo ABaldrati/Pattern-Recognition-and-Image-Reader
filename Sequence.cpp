@@ -22,3 +22,11 @@ int Sequence::getLength() const {
 int *Sequence::getValues() const {
     return values;
 }
+
+void Sequence::printSequence() {
+    for (int i=0;i<length;i++){
+        std::cout << values[i] << " ";
+    }
+    std::cout << std::endl;
+
+}

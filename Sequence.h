@@ -21,6 +21,8 @@ public:
 
     void generateRandomUniformSequence();
 
+    void printSequence();
+
 
     int getLength() const;
 
