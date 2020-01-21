@@ -9,11 +9,17 @@
 class Sequence {
 
 public:
-    explicit Sequence(int length) : length(length){}
+    explicit Sequence(int length, int max_value) : length(length), max_value(max_value){
+        values = new int[length]
+    }
+
+    void generate_random_sequence();
 
 
 private:
     int length;
+    int max_value;
+    int* values;
 
 };
 
