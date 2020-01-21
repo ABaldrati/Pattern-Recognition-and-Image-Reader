@@ -7,12 +7,13 @@
 
 template<typename T>
 int min_element_array(const T* array, const int length){
-    int min_el=array[0];
+    int min_el=0;
     for (int i=0;i<length;i++){
-        if(array[i]<min_el){
-            min_el = array[i];
+        if(array[i]<array[min_el]){
+            min_el = i;
         }
     }
+    return min_el;
 }
 
 #endif //PATTERN_RECOGNITION_UTILS_H
