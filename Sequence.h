@@ -10,10 +10,13 @@ class Sequence {
 
 public:
     explicit Sequence(int length, int max_value) : length(length), max_value(max_value){
-        values = new int[length]
+        values = new int[length];
     }
 
-    
+    ~Sequence(){
+        delete [] values;
+    }
+
 
     void generate_random_uniform_sequence();
 
