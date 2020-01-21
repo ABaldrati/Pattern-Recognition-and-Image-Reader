@@ -12,3 +12,11 @@ void Sequence::generate_random_uniform_sequence() {
     }
 
 }
+
+int Sequence::getLength() const {
+    return length;
+}
+
+int *Sequence::getValues() const {
+    return values;
+}
