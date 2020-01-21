@@ -13,7 +13,7 @@ public:
         values = new int[length]
     }
 
-    void generate_random_sequence();
+    void generate_random_uniform_sequence();
 
 
 private:
