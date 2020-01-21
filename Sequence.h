@@ -19,7 +19,7 @@ public:
     }
 
 
-    void generate_random_uniform_sequence();
+    void generateRandomUniformSequence();
 
 
     int getLength() const;

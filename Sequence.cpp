@@ -4,7 +4,7 @@
 
 #include "Sequence.h"
 #include <random>
-void Sequence::generate_random_uniform_sequence() {
+void Sequence::generateRandomUniformSequence() {
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(-max_value,max_value);
     for(int i=0;i<length;i++){
