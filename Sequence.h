@@ -13,6 +13,8 @@ public:
         values = new int[length]
     }
 
+    
+
     void generate_random_uniform_sequence();
 
 
