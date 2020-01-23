@@ -16,4 +16,13 @@ int min_element_array(const T* array, const int length){
     return min_el;
 }
 
+template<typename T>
+void print_array(const T* array, const int lenght,const std::string& name=""){
+    std::cout << std::endl << name << " ";
+    for(int i=0;i<lenght;i++){
+        std::cout << array[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
 #endif //PATTERN_RECOGNITION_UTILS_H
