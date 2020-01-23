@@ -11,8 +11,10 @@
 class PatternRecognition {
 public:
 
-    PatternRecognition(Sequence query_sequence, Sequence target_sequence) : query_sequence(query_sequence),
-                                                                            target_sequence(target_sequence) {}
+    PatternRecognition(const Sequence& query_sequence,const Sequence& target_sequence) : query_sequence(query_sequence),
+                                                                            target_sequence(target_sequence) {
+        begin = 0;
+    }
 
     void findPattern();
 
@@ -20,8 +22,8 @@ public:
 
 
 private:
-    Sequence query_sequence;
-    Sequence target_sequence;
+    const Sequence& query_sequence;
+    const Sequence& target_sequence;
     int begin;
 };
 
