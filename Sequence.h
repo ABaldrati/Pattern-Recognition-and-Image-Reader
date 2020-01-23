@@ -5,14 +5,16 @@
 #ifndef PATTERN_RECOGNITION_SEQUENCE_H
 #define PATTERN_RECOGNITION_SEQUENCE_H
 
+#include "Utils.h"
 
 class Sequence {
 
 public:
 
-    explicit Sequence(int length, int max_value) : length(length), max_value(max_value){
+    Sequence(int length, int max_value) : length(length), max_value(max_value) {
         values = new int[length];
     }
+
 
     ~Sequence(){
         delete [] values;
@@ -21,9 +23,6 @@ public:
 
     void generateRandomUniformSequence();
 
-    void printSequence();
-
-
     int getLength() const;
 
     int *getValues() const;
@@ -31,7 +30,7 @@ public:
 private:
     int length;
     int max_value;
-    int* values;
+    int *values;
 
 };
 

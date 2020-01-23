@@ -6,13 +6,14 @@
 #include <random>
 #include <iostream>
 
-void Sequence::generateRandomUniformSequence() {
-    std::default_random_engine generator(time(NULL));
-    std::uniform_int_distribution<int> distribution(-max_value,max_value);
-    for(int i=0;i<length;i++){
-        values[i]=distribution(generator);
-    }
 
+void Sequence::generateRandomUniformSequence() {
+    std::random_device r;
+    std::default_random_engine generator(r());
+    std::uniform_int_distribution<int> distribution(-max_value, max_value);
+    for (int i = 0; i < length; i++) {
+        values[i] = distribution(generator);
+    }
 }
 
 int Sequence::getLength() const {
@@ -23,10 +24,3 @@ int *Sequence::getValues() const {
     return values;
 }
 
-void Sequence::printSequence() {
-    for (int i=0;i<length;i++){
-        std::cout << values[i] << " ";
-    }
-    std::cout << std::endl;
-
-}
