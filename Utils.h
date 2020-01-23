@@ -5,6 +5,9 @@
 #ifndef PATTERN_RECOGNITION_UTILS_H
 #define PATTERN_RECOGNITION_UTILS_H
 
+#include <iostream>
+#include <string>
+
 template<typename T>
 int min_element_array(const T* array, const int length){
     int min_el=0;
