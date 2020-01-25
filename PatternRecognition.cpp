@@ -17,11 +17,10 @@ void PatternRecognition::findPattern() {
     for (int i = 0; i < sads_length; i++) {
         sads[i] = 0;
         for (int j = 0; j < query_sequence.getLength(); j++) {
-            std::cout << "target = " << target_sequence.getValues() << std::endl;
-            int i1 = target_sequence.getValues()[i + j];
-            int i2 = query_sequence.getValues()[j];
+            int target_value = target_sequence.getValues()[i + j];
+            int query_value = query_sequence.getValues()[j];
 
-            sads[i] += std::abs(i1 - i2);
+            sads[i] += std::abs(target_value - query_value);
         }
     }
 
