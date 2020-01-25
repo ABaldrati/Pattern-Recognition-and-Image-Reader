@@ -20,7 +20,6 @@ int Sequence::getLength() const {
     return length;
 }
 
-int *Sequence::getValues() const {
+const std::vector<int> &Sequence::getValues() const {
     return values;
 }
-

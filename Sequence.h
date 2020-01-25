@@ -6,18 +6,14 @@
 #define PATTERN_RECOGNITION_SEQUENCE_H
 
 #include "Utils.h"
+#include <vector>
 
 class Sequence {
 
 public:
 
-    Sequence(int length, int max_value) : length(length), max_value(max_value) {
-        values = new int[length];
-    }
-
-
-    ~Sequence(){
-        delete [] values;
+    Sequence(const int length, const int max_value) : length(length), max_value(max_value) {
+        values = std::vector<int>(length);
     }
 
 
@@ -25,12 +21,12 @@ public:
 
     int getLength() const;
 
-    int *getValues() const;
+    const std::vector<int> &getValues() const;
 
 private:
-    int length;
-    int max_value;
-    int *values;
+    const int length;
+    const int max_value;
+    std::vector<int> values;
 
 };
 
