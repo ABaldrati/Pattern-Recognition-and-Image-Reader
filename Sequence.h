@@ -7,25 +7,41 @@
 
 #include "Utils.h"
 #include <vector>
+#include <ctime>
+#include "Sequence.h"
+#include <random>
+#include <iostream>
 
+template<typename T>
 class Sequence {
 
 public:
 
-    Sequence(const int length, const int max_value) : length(length), max_value(max_value) {
+    Sequence(const int length) : length(length) {
         values = std::vector<int>(length);
     }
 
 
-    void generateRandomUniformSequence();
+    void generateRandomUniformSequence(const T max_value) {
+        std::random_device r;
+        std::default_random_engine generator(r());
+        std::uniform_int_distribution<T> distribution(-max_value, max_value);
+        for (int i = 0; i < length; i++) {
+            values[i] = distribution(generator);
+        }
+    }
 
-    int getLength() const;
 
-    const std::vector<int> &getValues() const;
+    int getLength() const {
+        return length;
+    }
+
+    const std::vector<int> &getValues() const {
+        return values;
+    }
 
 private:
     const int length;
-    const int max_value;
     std::vector<int> values;
 
 };
