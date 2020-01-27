@@ -7,12 +7,13 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 template<typename T>
-int min_element_array(const T* array, const int length){
+int minElementVector(const std::vector<T> vector){
     int min_el=0;
-    for (int i=0;i<length;i++){
-        if(array[i]<array[min_el]){
+    for (int i=0;i<vector.size();i++){
+        if(vector[i] < vector[min_el]){
             min_el = i;
         }
     }
