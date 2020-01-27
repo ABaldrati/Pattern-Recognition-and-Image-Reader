@@ -49,10 +49,12 @@ public:
 
     }
 
-    void PrintPattern() {
-        for (int i = begin; i < begin + query_sequence.getValues().size(); i++) {
-            std::cout << target_sequence.getValues()[i] << " ";
-        }
+    void printPatterns() {
+        printVector(target_sequence.getValues(),"target");
+        printVector(query_sequence.getValues(),"query");
+        printVector(sads_vector,"sads");
+        printVector(nearest_vector, "nearest");
+    }
 
         std::cout << std::endl;
 
