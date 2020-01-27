@@ -18,32 +18,35 @@ template<typename T>
 class PatternRecognition1D {
 public:
 
-    PatternRecognition(const Sequence<T> &query_sequence, const Sequence<T> &target_sequence) : query_sequence(
+    PatternRecognition1D(const Sequence<T> &query_sequence, const Sequence<T> &target_sequence) : query_sequence(
             query_sequence), target_sequence(target_sequence) {
-        begin = 0;
+        offset_begin = 0;
+
+        nearest_vector = std::vector<T>(query_sequence.getValues().size());
+
+        int sads_length = target_sequence.getValues().size() - query_sequence.getValues().size() + 1;
+        sads_vector = std::vector<T>(sads_length);
     }
 
     void findPattern() {
-        int sads_length = target_sequence.getValues().size() - query_sequence.getValues().size() + 1;
-        T *sads = new T[sads_length];
 #pragma omp parallel for schedule(static) shared(sads, sads_length) default(none)
-        for (int i = 0; i < sads_length; i++) {
-            sads[i] = 0;
+        for (int i = 0; i < sads_vector.size(); i++) {
+            sads_vector[i] = 0;
             for (int j = 0; j < query_sequence.getValues().size(); j++) {
                 T target_value = target_sequence.getValues()[i + j];
                 T query_value = query_sequence.getValues()[j];
 
-                sads[i] += std::abs(target_value - query_value);
+                sads_vector[i] += std::abs(target_value - query_value);
             }
         }
 
-        std::cout << std::endl << "sads ";
-        for (int i = 0; i < sads_length; i++) {
-            std::cout << sads[i] << " ";
-        }
-        std::cout << std::endl;
+        offset_begin = minElementVector(sads_vector);
 
-        begin = min_element_array(sads, sads_length);
+        for (int i = 0; i < nearest_vector.size() ; ++i) {
+            nearest_vector[i] = target_sequence.getValues()[i+offset_begin];
+        }
+
+
     }
 
     void PrintPattern() {
@@ -62,7 +65,9 @@ public:
 private:
     const Sequence<T> &query_sequence;
     const Sequence<T> &target_sequence;
-    int begin;
+    std::vector<T> sads_vector;
+    std::vector<T> nearest_vector;
+    int offset_begin;
 };
 
 
