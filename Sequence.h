@@ -16,8 +16,15 @@ class Sequence {
 
 public:
 
-    explicit Sequence(const int length) {
-        values = std::vector<T>(length);
+    explicit Sequence(int initial_length) {
+        values = std::vector<T>(initial_length);
+    }
+
+    Sequence(const Sequence &rh) {
+        int size = rh.getValues().size();
+        values = std::vector<T>(size);
+        for (int i = 0; i < size; i++)
+            values[i] = values.buffer[i];
     }
 
     void generateRandomUniformSequence(const T max_value) {
@@ -29,13 +36,14 @@ public:
         }
     }
 
+
     const std::vector<T> &getValues() const {
         return values;
     }
 
+
 private:
     std::vector<T> values;
-
 };
 
 #endif //PATTERN_RECOGNITION_SEQUENCE_H
