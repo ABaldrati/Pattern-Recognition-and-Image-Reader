@@ -15,7 +15,7 @@
 #endif
 
 template<typename T>
-class PatternRecognition {
+class PatternRecognition1D {
 public:
 
     PatternRecognition(const Sequence<T> &query_sequence, const Sequence<T> &target_sequence) : query_sequence(
