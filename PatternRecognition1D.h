@@ -56,13 +56,25 @@ public:
         printVector(nearest_vector, "nearest");
     }
 
-        std::cout << std::endl;
-
-        for (int i = 0; i < query_sequence.getValues().size(); i++) {
-            std::cout << query_sequence.getValues()[i] << " ";
-        }
+    const std::vector<T> &getSadsVector() const {
+        return sads_vector;
     }
 
+    const Sequence<T> &getQuerySequence() const {
+        return query_sequence;
+    }
+
+    const Sequence<T> &getTargetSequence() const {
+        return target_sequence;
+    }
+
+    const std::vector<T> &getNearestVector() const {
+        return nearest_vector;
+    }
+
+    int getOffsetBegin() const {
+        return offset_begin;
+    }
 
 private:
     const Sequence<T> &query_sequence;
