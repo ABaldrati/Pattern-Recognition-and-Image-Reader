@@ -2,8 +2,8 @@
 // Created by alberto on 21/01/20.
 //
 
-#ifndef PATTERN_RECOGNITION_SEQUENCE_H
-#define PATTERN_RECOGNITION_SEQUENCE_H
+#ifndef PATTERN_RECOGNITION_VECTOR_H
+#define PATTERN_RECOGNITION_VECTOR_H
 
 #include "Utils.h"
 #include <vector>
@@ -12,15 +12,15 @@
 #include <iostream>
 
 template<typename T>
-class Sequence {
+class Vector {
 
 public:
 
-    explicit Sequence(int initial_length) {
+    explicit Vector(int initial_length) {
         values = std::vector<T>(initial_length);
     }
 
-    Sequence(const Sequence &rh) {
+    Vector(const Vector &rh) {
         int size = rh.getValues().size();
         values = std::vector<T>(size);
         for (int i = 0; i < size; i++)
@@ -58,4 +58,4 @@ private:
     std::vector<T> values;
 };
 
-#endif //PATTERN_RECOGNITION_SEQUENCE_H
+#endif //PATTERN_RECOGNITION_VECTOR_H
