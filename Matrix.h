@@ -30,12 +30,7 @@ public:
     }
 
     void generateRandomUniformMatrix(const T max_value) {
-        std::random_device r;
-        std::default_random_engine generator(r());
-        std::uniform_real_distribution<T> distribution(-max_value, max_value);
-        for (int i = 0; i < rows * columns; i++) {
-            values[i] = distribution(generator);
-        }
+        return _generateRandomUniformMatrix(max_value, std::is_floating_point<T>());
     }
 
     int getNumberOfRows() const {
@@ -69,6 +64,24 @@ private:
     std::vector<T> values;
     int rows;
     int columns;
+
+    void _generateRandomUniformMatrix(const T max_value,  std::false_type) {
+        std::random_device r;
+        std::default_random_engine generator(r());
+        std::uniform_int_distribution<T> distribution(-max_value, max_value);
+        for (int i = 0; i < rows * columns; i++) {
+            values[i] = distribution(generator);
+        }
+    }
+
+    void _generateRandomUniformMatrix(const T max_value,  std::true_type) {
+        std::random_device r;
+        std::default_random_engine generator(r());
+        std::uniform_real_distribution<T> distribution(-max_value, max_value);
+        for (int i = 0; i < rows * columns; i++) {
+            values[i] = distribution(generator);
+        }
+    }
 
 };
 

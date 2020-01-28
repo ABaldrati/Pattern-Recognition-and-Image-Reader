@@ -1,24 +1,23 @@
 #include <iostream>
-#include <zconf.h>
-#include "Sequence.h"
-#include "PatternRecognition.h"
 #include "Utils.h"
+#include "Matrix.h"
+#include "PatternRecognition.h"
 #include <chrono>
 int main() {
     auto t1 = std::chrono::high_resolution_clock::now();
-    Sequence<int> target(100);
-    Sequence<int> query(5);
+    Matrix<float> target(1,10);
+    Matrix<float> query(1,5);
 
 
-    target.generateRandomUniformSequence(10);
-    query.generateRandomUniformSequence(10);
+    target.generateRandomUniformMatrix(10);
+    query.generateRandomUniformMatrix(10);
 
     //print_array(target.getValues(),target.getLength(),"target");
     //print_array(query.getValues(), query.getLength(),"query");
 
-    PatternRecognition<int> pattern(query,target);
+    PatternRecognition<float> pattern(query, target);
     pattern.findPattern();
-    pattern.PrintPattern();
+    pattern.printPatterns();
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
 

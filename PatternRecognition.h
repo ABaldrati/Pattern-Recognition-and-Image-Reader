@@ -2,10 +2,9 @@
 // Created by alberto on 25/01/20.
 //
 
-#ifndef PATTERN_RECOGNITION_PATTERNRECOGNITION2D_H
-#define PATTERN_RECOGNITION_PATTERNRECOGNITION2D_H
+#ifndef PATTERN_RECOGNITION_PATTERNRECOGNITION_H
+#define PATTERN_RECOGNITION_PATTERNRECOGNITION_H
 
-#include "Sequence.h"
 #include "Utils.h"
 #include <cmath>
 #include <iostream>
@@ -16,10 +15,10 @@
 #endif
 
 template<typename T>
-class PatternRecognition2D {
+class PatternRecognition {
 public:
 
-    PatternRecognition2D(const Matrix<T> &query_matrix, const Matrix<T> &target_matrix) : query_matrix(
+    PatternRecognition(const Matrix<T> &query_matrix, const Matrix<T> &target_matrix) : query_matrix(
             query_matrix), target_matrix(target_matrix), nearest_matrix(
             Matrix<T>(query_matrix.getNumberOfRows(), query_matrix.getNumberOfColumns())), sads_matrix(
             Matrix<T>(target_matrix.getNumberOfRows() - query_matrix.getNumberOfColumns() + 1,
@@ -65,7 +64,7 @@ public:
 
 
     void printPatterns() {
-        std::cout<< std::endl <<"TL coordinate " << top_left_coordinate;
+        std::cout<< std::endl <<"TL coordinate " << top_left_coordinate << std::endl;
         printMatrix(target_matrix.getValues(), target_matrix.getNumberOfRows(), target_matrix.getNumberOfColumns(), "target");
         printMatrix(query_matrix.getValues(), query_matrix.getNumberOfRows(), query_matrix.getNumberOfColumns(), "query");
         printMatrix(sads_matrix.getValues(), sads_matrix.getNumberOfRows(), sads_matrix.getNumberOfColumns(), "sads");
@@ -100,4 +99,4 @@ private:
     int top_left_coordinate;
 };
 
-#endif //PATTERN_RECOGNITION_PATTERNRECOGNITION2D_H
+#endif //PATTERN_RECOGNITION_PATTERNRECOGNITION_H

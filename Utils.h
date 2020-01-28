@@ -21,15 +21,6 @@ int minElementVector(const std::vector<T> vector){
 }
 
 template<typename T>
-void printVector(const std::vector<T> vector, const std::string& name= ""){
-    std::cout << std::endl << name << " ";
-    for(int i=0;i<vector.size();i++){
-        std::cout << vector[i] << " ";
-    }
-    std::cout << std::endl;
-}
-
-template<typename T>
 void printMatrix(const std::vector<T>& matrix,int rows, int columns,const std::string& name="") {
     std::cout << std::endl << name << " " << std::endl;
     for (int i = 0; i < rows; i++) {
