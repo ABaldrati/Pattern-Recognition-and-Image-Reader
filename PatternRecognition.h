@@ -8,6 +8,7 @@
 #include "Utils.h"
 #include <cmath>
 #include <iostream>
+#include <zconf.h>
 #include "Matrix.h"
 
 #ifdef _OPENMP
@@ -21,8 +22,8 @@ public:
     PatternRecognition(const Matrix<T> &query_matrix, const Matrix<T> &target_matrix) : query_matrix(
             query_matrix), target_matrix(target_matrix), nearest_matrix(
             Matrix<T>(query_matrix.getNumberOfRows(), query_matrix.getNumberOfColumns())), sads_matrix(
-            Matrix<T>(target_matrix.getNumberOfRows() - query_matrix.getNumberOfColumns() + 1,
-                      target_matrix.getNumberOfColumns() - query_matrix.getNumberOfColumns() + 1)) {
+            Matrix<T>((target_matrix.getNumberOfRows() - query_matrix.getNumberOfRows() + 1),
+                      (target_matrix.getNumberOfColumns() - query_matrix.getNumberOfColumns() + 1))) {
         top_left_coordinate = -1;
     }
 
