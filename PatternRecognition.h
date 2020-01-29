@@ -28,8 +28,7 @@ public:
     }
 
     void findPattern() {
-
-#pragma omp parallel for schedule(static) shared(sads, sads_length) default(none)
+#pragma omp parallel for collapse(2) schedule(static)  default(none)
 
         for (int i = 0; i < sads_matrix.getNumberOfRows(); i++) {
             for (int j = 0; j < sads_matrix.getNumberOfColumns(); j++) {
