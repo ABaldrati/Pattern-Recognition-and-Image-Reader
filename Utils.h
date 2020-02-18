@@ -10,10 +10,10 @@
 #include <vector>
 
 template<typename T>
-int minElementVector(const std::vector<T> vector){
-    int min_el=0;
-    for (int i=0;i<vector.size();i++){
-        if(vector[i] < vector[min_el]){
+int minElementVector(const std::vector<T> vector) {
+    int min_el = 0;
+    for (int i = 0; i < vector.size(); ++i) {
+        if (vector[i] < vector[min_el]) {
             min_el = i;
         }
     }
@@ -21,11 +21,11 @@ int minElementVector(const std::vector<T> vector){
 }
 
 template<typename T>
-void printMatrix(const std::vector<T>& matrix,int rows, int columns,const std::string& name="") {
+void printMatrix(const std::vector<T> &matrix, int rows, int columns, const std::string &name = "") {
     std::cout << std::endl << name << " " << std::endl;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            std::cout << matrix[columns * i + j]  << " ";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            std::cout << matrix[columns * i + j] << " ";
         }
         std::cout << std::endl;
     }

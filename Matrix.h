@@ -25,7 +25,7 @@ public:
         rows = rh.rows;
         columns = rh.columns;
         values = std::vector<T>(rows * columns);
-        for (int i = 0; i < rows * columns; i++)
+        for (int i = 0; i < rows * columns; ++i)
             values[i] = rh.values[i];
     }
 
@@ -69,7 +69,7 @@ private:
         std::random_device r;
         std::default_random_engine generator(r());
         std::uniform_int_distribution<T> distribution(-max_value, max_value);
-        for (int i = 0; i < rows * columns; i++) {
+        for (int i = 0; i < rows * columns; ++i) {
             values[i] = distribution(generator);
         }
     }
@@ -78,7 +78,7 @@ private:
         std::random_device r;
         std::default_random_engine generator(r());
         std::uniform_real_distribution<T> distribution(-max_value, max_value);
-        for (int i = 0; i < rows * columns; i++) {
+        for (int i = 0; i < rows * columns; ++i) {
             values[i] = distribution(generator);
         }
     }

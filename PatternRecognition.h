@@ -30,14 +30,14 @@ public:
     void findPattern() {
 #pragma omp parallel for collapse(2) schedule(static)  default(none)
 
-        for (int i = 0; i < sads_matrix.getNumberOfRows(); i++) {
-            for (int j = 0; j < sads_matrix.getNumberOfColumns(); j++) {
+        for (int i = 0; i < sads_matrix.getNumberOfRows(); ++i) {
+            for (int j = 0; j < sads_matrix.getNumberOfColumns(); ++j) {
 
                 sads_matrix.setValue(i, j, 0);
 
                 T difference_value = 0;
-                for (int k = 0; k < query_matrix.getNumberOfRows(); k++) {
-                    for (int l = 0; l < query_matrix.getNumberOfColumns(); l++) {
+                for (int k = 0; k < query_matrix.getNumberOfRows(); ++k) {
+                    for (int l = 0; l < query_matrix.getNumberOfColumns(); ++l) {
 
                         T target_value = target_matrix.getValue(i + k, j + l);
                         T query_value = query_matrix.getValue(k, l);
