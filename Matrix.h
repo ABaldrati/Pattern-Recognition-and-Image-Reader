@@ -5,6 +5,11 @@
 #ifndef PATTERN_RECOGNITION_MATRIX_H
 #define PATTERN_RECOGNITION_MATRIX_H
 
+#include <opencv2/core/core.hpp>
+#include <opencv2/viz/vizcore.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <cv.hpp>
+#include <iostream>
 #include <vector>
 #include <iostream>
 #include <random>
@@ -27,6 +32,19 @@ public:
         values = std::vector<T>(rows * columns);
         for (int i = 0; i < rows * columns; ++i)
             values[i] = rh.values[i];
+    }
+
+    Matrix(const cv::Mat &inputImage) {
+        rows = inputImage.rows;
+        columns = inputImage.cols;
+        values = std::vector<T>(rows * columns);
+        if (inputImage.isContinuous()) {
+            values.assign(inputImage.data, inputImage.data + inputImage.total());
+        } else {
+            for (int i = 0; i < inputImage.rows; ++i) {
+                values.insert(values.end(), inputImage.ptr<uchar>(i), inputImage.ptr<uchar>(i) + inputImage.cols);
+            }
+        };
     }
 
     void generateRandomUniformMatrix(const T max_value) {
