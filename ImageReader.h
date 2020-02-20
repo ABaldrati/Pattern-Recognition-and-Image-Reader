@@ -25,12 +25,14 @@
 
 namespace fs = std::filesystem;
 
-std::vector<cv::Mat> sequentialRead(std::string &inputDir);
+std::vector<std::pair<cv::Mat, fs::path>> sequentialRead(std::string &inputDir, int color = CV_LOAD_IMAGE_GRAYSCALE);
 
 
-std::vector<cv::Mat> parallelSyncRead(std::string &inputDir, int numThreads = -1);
+std::vector<std::pair<cv::Mat, fs::path>>
+parallelSyncRead(std::string &inputDir,  int numThreads = -1 ,int color = CV_LOAD_IMAGE_GRAYSCALE);
 
 
-std::vector<boost::future<cv::Mat>> asyncParallel(std::string &inputDir, int numThreads = -1);
+std::vector<std::pair<boost::future<cv::Mat>, fs::path>>
+asyncParallel(std::string &inputDir,boost::basic_thread_pool &ThreadPool , int color = CV_LOAD_IMAGE_GRAYSCALE);
 
 #endif //PATTERN_RECOGNITION_IMAGEREADER_H
