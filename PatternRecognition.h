@@ -27,9 +27,13 @@ public:
         cx_coordinate = target_matrix.getNumberOfColumns();
     }
 
-    void findPattern() {
-#pragma omp parallel for collapse(2) schedule(static)  default(none)
-
+    void findPattern(int numThread = -1) {
+#ifdef _OPENMP
+        if(numThread < 1){
+            numThread= omp_get_num_devices();
+        }
+#endif
+#pragma omp parallel for num_threads(numThread) collapse(2) schedule(static) default(none)
         for (int i = 0; i < sads_matrix.getNumberOfRows(); ++i) {
             for (int j = 0; j < sads_matrix.getNumberOfColumns(); ++j) {
 
