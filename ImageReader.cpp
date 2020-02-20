@@ -2,10 +2,10 @@
 
 namespace fs = std::filesystem;
 
-std::vector<cv::Mat> sequentialRead(std::string &inputDir) {
-    auto images = std::vector<cv::Mat>();
+std::vector<std::pair<cv::Mat, fs::path>> sequentialRead(std::string &inputDir, int color) {
+    auto images = std::vector<std::pair<cv::Mat, fs::path>>();
     for (const auto &dirEntry : fs::recursive_directory_iterator(inputDir)) {
-        cv::Mat image = cv::imread(dirEntry.path().u8string(), 0);
+        cv::Mat image = cv::imread(dirEntry.path().u8string(), color);
 
         if (!image.data)                              // Check for invalid input
         {
@@ -31,7 +31,7 @@ std::vector<cv::Mat> parallelSyncRead(std::string &inputDir, int numThreads) {
 
 #pragma omp parallel for schedule(static) num_threads(numThreads) shared(image_paths, std::cout, images) default(none)
     for (int i = 0; i < image_paths.size(); i++) {
-        cv::Mat image = cv::imread(image_paths[i], 0);
+        cv::Mat image = cv::imread(image_paths[i].u8string(), color);
 
         if (!image.data)                              // Check for invalid input
         {
@@ -45,18 +45,14 @@ std::vector<cv::Mat> parallelSyncRead(std::string &inputDir, int numThreads) {
 }
 
 
-std::vector<boost::future<cv::Mat>> asyncParallel(std::string &inputDir, int numThreads) {
-    if (numThreads < 1) {
-        numThreads = std::thread::hardware_concurrency();
-    }
-
-    boost::basic_thread_pool ThreadPool(numThreads);
+std::vector<std::pair<boost::future<cv::Mat>, fs::path>>
+asyncParallel(std::string &inputDir, boost::basic_thread_pool &ThreadPool, int color) {
 
     std::vector<boost::future<cv::Mat>> fut_images = std::vector<boost::future<cv::Mat>>();
 
     std::vector<std::string> image_paths = std::vector<std::string>();
     for (const auto &dirEntry : fs::recursive_directory_iterator(inputDir)) {
-        auto readImage = boost::bind<cv::Mat>([](std::string image) { return cv::imread(image, 0); },
+        auto readImage = boost::bind<cv::Mat>([color](std::string image) { return cv::imread(image, color); },
                                               dirEntry.path().u8string());
         fut_images.push_back(boost::async(ThreadPool, readImage));
     }
