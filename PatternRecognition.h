@@ -20,8 +20,7 @@ class PatternRecognition {
 public:
 
     PatternRecognition(const Matrix<T> &query_matrix, const Matrix<T> &target_matrix) : query_matrix(
-            query_matrix), target_matrix(target_matrix), nearest_matrix(
-            Matrix<T>(query_matrix.getNumberOfRows(), query_matrix.getNumberOfColumns())), sads_matrix(
+            query_matrix), target_matrix(target_matrix), sads_matrix(
             Matrix<T>((target_matrix.getNumberOfRows() - query_matrix.getNumberOfRows() + 1),
                       (target_matrix.getNumberOfColumns() - query_matrix.getNumberOfColumns() + 1))) {
         cy_coordinate = target_matrix.getNumberOfRows();
@@ -53,25 +52,18 @@ public:
         int top_left_coordinate = minElementVector(sads_matrix.getValues());
         cy_coordinate = top_left_coordinate / sads_matrix.getNumberOfColumns();
         cx_coordinate = top_left_coordinate % sads_matrix.getNumberOfColumns();
-
-        for (int i = 0; i < nearest_matrix.getNumberOfRows(); ++i) {
-            for (int j = 0; j < nearest_matrix.getNumberOfColumns(); ++j) {
-                T nearest_value = target_matrix.getValue(i + cy_coordinate, j + cx_coordinate);
-                nearest_matrix.setValue(i, j, nearest_value);
-            }
-        }
     }
 
 
-
     void printPatterns() {
-        std::cout<< std::endl <<"cx_coordinate " << cx_coordinate << std::endl;
-        std::cout<< std::endl <<"cy_coordinate " << cy_coordinate << std::endl;
+        std::cout << std::endl << "cx_coordinate " << cx_coordinate << std::endl;
+        std::cout << std::endl << "cy_coordinate " << cy_coordinate << std::endl;
 
-        printMatrix(target_matrix.getValues(), target_matrix.getNumberOfRows(), target_matrix.getNumberOfColumns(), "target");
-        printMatrix(query_matrix.getValues(), query_matrix.getNumberOfRows(), query_matrix.getNumberOfColumns(), "query");
+        printMatrix(target_matrix.getValues(), target_matrix.getNumberOfRows(), target_matrix.getNumberOfColumns(),
+                    "target");
+        printMatrix(query_matrix.getValues(), query_matrix.getNumberOfRows(), query_matrix.getNumberOfColumns(),
+                    "query");
         printMatrix(sads_matrix.getValues(), sads_matrix.getNumberOfRows(), sads_matrix.getNumberOfColumns(), "sads");
-        printMatrix(nearest_matrix.getValues(), nearest_matrix.getNumberOfRows(), nearest_matrix.getNumberOfColumns(), "nearest");
     }
 
     const Matrix<T> &getQueryMatrix() const {
@@ -86,9 +78,6 @@ public:
         return sads_matrix;
     }
 
-    const Matrix<T> &getNearestMatrix() const {
-        return nearest_matrix;
-    }
 
     int getCxCoordinate() const {
         return cx_coordinate;
@@ -102,7 +91,6 @@ private:
     const Matrix<T> &query_matrix;
     const Matrix<T> &target_matrix;
     Matrix<T> sads_matrix;
-    Matrix<T> nearest_matrix;
     int cx_coordinate;
     int cy_coordinate;
 };
