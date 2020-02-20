@@ -11,7 +11,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(Pattern_Recognition mainPatternRecognition.cpp Matrix.h Utils.h PatternRecognition.h)
 add_executable(Image_Reader mainImageReader.cpp ImageReader.h ImageReader.cpp)
-
+add_executable(Image_Reader_and_Pattern_Recognition mainImageReaderAndPatternRecognition.cpp Matrix.h Utils.h PatternRecognition.h ImageReader.cpp ImageReader.h)
 
 target_link_libraries(Pattern_Recognition ${OpenCV_LIBS})
 target_link_libraries(Pattern_Recognition stdc++fs)
@@ -20,3 +20,7 @@ target_link_libraries(Pattern_Recognition boost_thread boost_system)
 target_link_libraries(Image_Reader ${OpenCV_LIBS})
 target_link_libraries(Image_Reader stdc++fs)
 target_link_libraries(Image_Reader boost_thread boost_system)
+
+target_link_libraries(Image_Reader_and_Pattern_Recognition ${OpenCV_LIBS})
+target_link_libraries(Image_Reader_and_Pattern_Recognition stdc++fs)
+target_link_libraries(Image_Reader_and_Pattern_Recognition boost_thread boost_system)
