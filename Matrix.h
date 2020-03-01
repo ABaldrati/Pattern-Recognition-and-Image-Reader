@@ -20,9 +20,9 @@ public:
 
     Matrix(int r, int c) : rows(r), columns(c) {
         if (r < 1)
-            rows = 1;
+            throw std::out_of_range("Il numero di righe deve essere maggiore di uno");
         if (c < 1)
-            columns = 1;
+            throw std::out_of_range("Il numero di colonne deve essere maggiore di uno");
         values = std::vector<T>(rows * columns);
     }
 
