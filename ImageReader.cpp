@@ -6,12 +6,6 @@ std::vector<std::pair<cv::Mat, fs::path>> sequentialRead(std::string &inputDir, 
     auto images = std::vector<std::pair<cv::Mat, fs::path>>();
     for (const auto &dirEntry : fs::recursive_directory_iterator(inputDir)) {
         cv::Mat image = cv::imread(dirEntry.path().u8string(), color);
-
-        if (!image.data)                              // Check for invalid input
-        {
-            std::cout << "Could not open or find the image" << std::endl;
-        }
-
         images.push_back(std::make_pair(image, dirEntry.path()));
     }
     return images;
@@ -36,10 +30,6 @@ std::vector<std::pair<cv::Mat, fs::path>> parallelSyncRead(std::string &inputDir
     for (int i = 0; i < image_paths.size(); i++) {
         cv::Mat image = cv::imread(image_paths[i].u8string(), color);
 
-        if (!image.data)                              // Check for invalid input
-        {
-            std::cout << "Could not open or find the image" << std::endl;
-        }
 #pragma omp critical
         images.push_back(std::make_pair(image, image_paths[i]));
     }
@@ -48,8 +38,7 @@ std::vector<std::pair<cv::Mat, fs::path>> parallelSyncRead(std::string &inputDir
 }
 
 
-std::vector<std::pair<boost::future<cv::Mat>, fs::path>>
-asyncParallel(std::string &inputDir, boost::basic_thread_pool &ThreadPool, int color) {
+std::vector<std::pair<boost::future<cv::Mat>, fs::path>>asyncParallel(std::string &inputDir, boost::basic_thread_pool &ThreadPool, int color) {
 
     auto fut_images = std::vector<std::pair<boost::future<cv::Mat>, fs::path>>();
 
