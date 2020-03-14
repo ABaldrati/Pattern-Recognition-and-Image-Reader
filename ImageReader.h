@@ -3,10 +3,7 @@
 
 #define BOOST_THREAD_VERSION 5
 #define BOOST_THREAD_PROVIDES_EXECUTORS
-#define BOOST_THREAD_USES_LOG_THREAD_ID
-#define BOOST_THREAD_QUEUE_DEPRECATE_OLD
 #define BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
-#define BOOST_THREAD_PROVIDES_FUTURE_WHEN_ALL_WHEN_ANY
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/viz/vizcore.hpp>
@@ -18,11 +15,7 @@
 #include <future>
 #include "omp.h"
 #include <boost/thread/future.hpp>
-#include <boost/thread/caller_context.hpp>               // for BOOST_CONTEXTOF, caller_context_t, operator<<
-#include <boost/thread/executors/basic_thread_pool.hpp>  // for basic_thread_pool
-#include <boost/thread/executors/executor.hpp>           // for executor
-#include <boost/thread/executors/executor_adaptor.hpp>   // for executor_adaptor
-
+#include <boost/thread/executors/basic_thread_pool.hpp>
 namespace fs = std::filesystem;
 
 std::vector<std::pair<cv::Mat, fs::path>> sequentialRead(std::string &inputDir, int color = CV_LOAD_IMAGE_GRAYSCALE);
