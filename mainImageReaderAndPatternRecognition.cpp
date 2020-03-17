@@ -8,18 +8,20 @@
 
 int main() {
     //---------------------------------------------------
-    std::string inputDir = "../cats_and_dogsr";
+    std::string inputDir = "../test5k";
     fs::path outputDir = fs::u8path("../output_images");
+    const int numExecPerTest = 2;
+    const int maxNumThreads = 7 ;
     fs::create_directory(outputDir);
-    Matrix<int> query(25, 25);
+    Matrix<int> query(10, 10);
     query.generateRandomUniformMatrix(255);
 
-    for (int numThreads = 1; numThreads < 11; ++numThreads) {
+    for (int numThreads = 1; numThreads < maxNumThreads; ++numThreads) {
         boost::basic_thread_pool ThreadPool(numThreads);
         sleep(5);
 
         auto t1 = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < numExecPerTest; ++i) {
             std::vector<std::pair<boost::future<cv::Mat>, fs::path>> fut_images_and_paths = asyncParallel(
                     inputDir, ThreadPool, CV_LOAD_IMAGE_COLOR);
 
@@ -54,14 +56,14 @@ int main() {
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
         std::cout << "Parallel async execution with QueryMatrix " << query.getNumberOfRows() << "X"
                   << query.getNumberOfColumns() << " with numThread " << numThreads << "   "
-                  << float(duration / 5000000.) << std::endl;
+                  << float(duration / (numExecPerTest * 1000000.)) << std::endl;
 
         sleep(10);
     }
     std::cout << std::endl;
-    for (int numThreads = 1; numThreads < 11; ++numThreads) {
+    for (int numThreads = 1; numThreads < maxNumThreads; ++numThreads) {
         auto t3 = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numExecPerTest; i++) {
             std::vector<std::pair<cv::Mat, fs::path>> images_and_paths = parallelSyncRead(
                     inputDir, numThreads, CV_LOAD_IMAGE_COLOR);
 #pragma omp parallel for schedule(static) num_threads(numThreads) shared(outputDir, images_and_paths, query) default(none)
@@ -88,20 +90,20 @@ int main() {
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t4 - t3).count();
         std::cout << "Parallel sync execution with QueryMatrix " << query.getNumberOfRows() << "X"
                   << query.getNumberOfColumns() << " with numThread " << numThreads << "   "
-                  << float(duration / 5000000.) << std::endl;
+                  << float(duration / (numExecPerTest * 1000000.)) << std::endl;
         sleep(10);
     }
     std::cout << std::endl << std::endl;
     //------------------------------------------------------------------------------------------------------------------
-    Matrix<int> query1(50, 50);
+    Matrix<int> query1(20, 20);
     query1.generateRandomUniformMatrix(255);
 
-    for (int numThreads = 1; numThreads < 11; ++numThreads) {
+    for (int numThreads = 1; numThreads < maxNumThreads; ++numThreads) {
         boost::basic_thread_pool ThreadPool(numThreads);
-        sleep(5);
+        sleep(10);
 
         auto t1 = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < 5; ++i) {
+        for (int i = 0; i < numExecPerTest; ++i) {
             std::vector<std::pair<boost::future<cv::Mat>, fs::path>> fut_images_and_paths = asyncParallel(
                     inputDir, ThreadPool, CV_LOAD_IMAGE_COLOR);
 
@@ -136,14 +138,14 @@ int main() {
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
         std::cout << "Parallel async execution with QueryMatrix " << query1.getNumberOfRows() << "X"
                   << query1.getNumberOfColumns() << " with numThread " << numThreads << "   "
-                  << float(duration / 5000000.) << std::endl;
+                  << float(duration / (numExecPerTest * 1000000.)) << std::endl;
 
         sleep(10);
     }
     std::cout << std::endl;
-    for (int numThreads = 1; numThreads < 11; ++numThreads) {
+    for (int numThreads = 1; numThreads < maxNumThreads; ++numThreads) {
         auto t3 = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numExecPerTest; i++) {
             std::vector<std::pair<cv::Mat, fs::path>> images_and_paths = parallelSyncRead(
                     inputDir, numThreads, CV_LOAD_IMAGE_COLOR);
 #pragma omp parallel for schedule(static) num_threads(numThreads) shared(outputDir, images_and_paths, query1) default(none)
@@ -219,13 +221,16 @@ int main() {
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
         std::cout << "Parallel async execution with QueryMatrix " << query3.getNumberOfRows() << "X"
                   << query3.getNumberOfColumns() << " with numThread " << numThreads << "   "
-                  << float(duration / 5000000.) << std::endl;
+                  << float(duration / (numExecPerTest * 1000000.)) << std::endl;
 
         sleep(10);
     }
-    for (int numThreads = 1; numThreads < 11; ++numThreads) {
+
+    std::cout << std::endl << std::endl;
+
+    for (int numThreads = 1; numThreads < maxNumThreads; ++numThreads) {
         auto t3 = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numExecPerTest; i++) {
             std::vector<std::pair<cv::Mat, fs::path>> images_and_paths = parallelSyncRead(
                     inputDir, numThreads, CV_LOAD_IMAGE_COLOR);
 #pragma omp parallel for schedule(static) num_threads(numThreads) shared(outputDir, images_and_paths, query3) default(none)
@@ -252,10 +257,9 @@ int main() {
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t4 - t3).count();
         std::cout << "Parallel sync execution with QueryMatrix " << query3.getNumberOfRows() << "X"
                   << query3.getNumberOfColumns() << " with numThread " << numThreads << "   "
-                  << float(duration / 5000000.) << std::endl;
+                  << float(duration / (numExecPerTest * 1000000.)) << std::endl;
         sleep(10);
     }
 }
-
 
 
