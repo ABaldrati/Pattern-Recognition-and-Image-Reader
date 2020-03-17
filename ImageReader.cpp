@@ -33,7 +33,6 @@ std::vector<std::pair<cv::Mat, fs::path>> parallelSyncRead(std::string &inputDir
 #pragma omp critical
         images.push_back(std::make_pair(image, image_paths[i]));
     }
-
     return images;
 }
 
