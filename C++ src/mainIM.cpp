@@ -1,9 +1,9 @@
 #include "ImageReader.h"
 
 int main() {
-    std::string inputDir = "../EasyMotion";
+    std::string inputDir = "../../images/input_images";
     const int numExecPerTest = 5;
-    const int maxNumThreads = 12;
+    const int maxNumThreads = 11;
     sleep(10);
 
     for (int numThreads = 1; numThreads < maxNumThreads; ++numThreads) {

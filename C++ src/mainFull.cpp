@@ -8,10 +8,10 @@
 
 int main() {
     //---------------------------------------------------
-    std::string inputDir = "../test5k";
-    fs::path outputDir = fs::u8path("../output_images");
+    std::string inputDir = "../../images/input_images";
+    fs::path outputDir = fs::u8path("../../images/output_images");
     const int numExecPerTest = 5;
-    const int maxNumThreads = 12 ;
+    const int maxNumThreads = 11 ;
     fs::create_directory(outputDir);
     Matrix<int> query1(10, 10);
     query1.generateRandomUniformMatrix(255);
