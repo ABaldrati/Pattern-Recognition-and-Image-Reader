@@ -34,4 +34,4 @@ the first one written in C++ using OpenMP for enabling parallel execution, the s
 * **Alberto Baldrati**
 
 ## Acknowledgments
-* Project developed for *Parallel Computing* Informatic Engineering master degree course taught by professor [Marco Bertini](http://www.micc.unifi.it/bertini/) at the [University of Florence](https://www.unifi.it/changelang-eng.html), 
+* Project developed for *Parallel Computing* course held by professor [Marco Bertini](http://www.micc.unifi.it/bertini/) in the computer engineering master degree course at the [University of Florence](https://www.unifi.it/changelang-eng.html), 
