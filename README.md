@@ -9,7 +9,7 @@ the first one written in C++ using OpenMP for enabling parallel execution, the s
     For this project the source files are ```mainPR.cpp``` ```Matrix.h```
 ```Utils.h``` ```PatternRecognition.h```.
 
-    For more details about algorithm and performance comparison see [Pattern Recognition paper](https://github.com/ABaldrati/Pattern-Recognition-and-Image-Reader/blob/master/Paper/Image_Reader_paper.pdf)
+    For more details about algorithm and performance comparison see [Pattern Recognition paper](https://github.com/ABaldrati/Pattern-Recognition-and-Image-Reader/blob/master/Paper%20and%20Slides/Pattern_Recognition_paper.pdf)
 
 * **Image Reader and Asynchronous execution** - Firstly we have developed a simple Image Reader and then we have tried to exploit the power of asynchronous execution chaining together such Image Reader and the 2D Pattern Recognition algorithm.
 
@@ -19,7 +19,7 @@ the first one written in C++ using OpenMP for enabling parallel execution, the s
     ```Full_Execution``` in ```C++ src```.\
     For this project the sources files are all the files contained in ```C++ src```
     
-    For more details about algorithm and performance comparison see [Image Reader paper](https://github.com/ABaldrati/Pattern-Recognition-and-Image-Reader/blob/master/Paper/Image_Reader_paper.pdf)
+    For more details about algorithm and performance comparison see [Image Reader paper](https://github.com/ABaldrati/Pattern-Recognition-and-Image-Reader/blob/master/Paper%20and%20Slides/Image_Reader_paper.pdf)
 
 
 ## Built With
