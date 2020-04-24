@@ -13,7 +13,9 @@
 #include <filesystem>
 #include <chrono>
 #include <future>
-#include "omp.h"
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 #include <boost/thread/future.hpp>
 #include <boost/thread/executors/basic_thread_pool.hpp>
 namespace fs = std::filesystem;
